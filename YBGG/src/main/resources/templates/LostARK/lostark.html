@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YB.GG — 로스트아크</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/lostark.css" />
+</head>
+<body>
+
+  <!-- ────────── 헤더 ────────── -->
+  <header class="header">
+    <div class="header-top">
+      <div class="header-left">
+        <a href="index.html" class="logo">YB<span>.GG</span></a>
+        <span class="game-chip">
+          <span class="chip-dot"></span>
+          LOST ARK
+        </span>
+      </div>
+
+      <div class="header-search">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="none" width="16" height="16">
+          <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <input type="text" placeholder="캐릭터명을 검색해보세요..." />
+        <button class="search-btn">검색</button>
+      </div>
+
+      <div class="header-right">
+        <div class="hdr-dropdown" id="gameMenu">
+          <button class="hdr-btn" aria-haspopup="true" aria-expanded="false">
+            게임 선택
+            <svg viewBox="0 0 10 6" fill="none" width="10" height="6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="hdr-menu">
+            <li><a href="lostark.html"><span class="dot" style="--c:#3b82f6"></span>로스트아크</a></li>
+            <li><a href="#"><span class="dot" style="--c:#06b6d4"></span>로스트아크 모바일</a></li>
+          </ul>
+        </div>
+
+        <div class="hdr-dropdown" id="langMenu">
+          <button class="hdr-btn" aria-haspopup="true" aria-expanded="false">
+            🌐 한국어
+            <svg viewBox="0 0 10 6" fill="none" width="10" height="6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="hdr-menu lang-menu">
+            <li data-lang="ko">🇰🇷 한국어</li>
+            <li data-lang="en">🇺🇸 English</li>
+            <li data-lang="ja">🇯🇵 日本語</li>
+          </ul>
+        </div>
+
+        <a href="#" class="hdr-ghost-btn">로그인</a>
+        <a href="#" class="hdr-solid-btn">회원가입</a>
+      </div>
+    </div>
+
+    <!-- 게임 내 탭 네비 -->
+    <nav class="game-nav" aria-label="게임 내 메뉴">
+      <a href="#" class="gnav-link active">홈</a>
+      <a href="#" class="gnav-link">캐릭터</a>
+      <a href="#" class="gnav-link">길드</a>
+      <a href="#" class="gnav-link">순위</a>
+      <a href="#" class="gnav-link">통계</a>
+      <a href="#" class="gnav-link">시세</a>
+      <a href="#" class="gnav-link">패치</a>
+      <a href="#" class="gnav-link">미니게임</a>
+      <a href="#" class="gnav-link">커뮤니티</a>
+    </nav>
+  </header>
+
+  <!-- ────────── 메인 레이아웃 ────────── -->
+  <main class="page-layout">
+
+    <!-- 왼쪽 사이드바 -->
+    <aside class="sidebar sidebar-left">
+
+      <div class="side-card promo-green">
+        <p class="side-mini">SPONSOR</p>
+        <h3>로스트아크<br>후원하기</h3>
+        <p class="side-desc">개인배너 · 길드홍보 · 자유후원</p>
+      </div>
+
+      <div class="side-card">
+        <div class="side-card-head">
+          <h4>공지사항</h4>
+          <a href="#" class="more-link">더보기</a>
+        </div>
+        <ul class="notice-list">
+          <li>
+            <span class="nbadge blue">공지</span>
+            <span class="ntext">4월 업데이트 안내</span>
+            <em class="ndate">04.01</em>
+          </li>
+          <li>
+            <span class="nbadge purple">점검</span>
+            <span class="ntext">신규 상품 안내</span>
+            <em class="ndate">03.29</em>
+          </li>
+          <li>
+            <span class="nbadge green">이벤트</span>
+            <span class="ntext">주말 이벤트 진행</span>
+            <em class="ndate">03.25</em>
+          </li>
+          <li>
+            <span class="nbadge blue">공지</span>
+            <span class="ntext">서버 점검 예정 안내</span>
+            <em class="ndate">03.21</em>
+          </li>
+        </ul>
+      </div>
+
+      <div class="side-card">
+        <div class="side-card-head">
+          <h4>진행중 이벤트</h4>
+        </div>
+        <div class="event-list">
+          <div class="event-item">
+            <div class="event-thumb" style="background:linear-gradient(135deg,#f59e0b,#f97316)"></div>
+            <div class="event-info">
+              <strong>출석 이벤트</strong>
+              <span>04.01 ~ 04.15</span>
+            </div>
+          </div>
+          <div class="event-item">
+            <div class="event-thumb" style="background:linear-gradient(135deg,#10b981,#06b6d4)"></div>
+            <div class="event-info">
+              <strong>봄 맞이 보상</strong>
+              <span>04.01 ~ 04.29</span>
+            </div>
+          </div>
+          <div class="event-item">
+            <div class="event-thumb" style="background:linear-gradient(135deg,#8b5cf6,#3b82f6)"></div>
+            <div class="event-info">
+              <strong>레이드 챌린지</strong>
+              <span>03.28 ~ 04.20</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="side-card">
+        <div class="side-card-head">
+          <h4>추천 스트리머</h4>
+        </div>
+        <div class="streamer-grid">
+          <div class="streamer-item">
+            <div class="streamer-thumb" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)"></div>
+            <span class="live-dot">LIVE</span>
+            <p>리원 L</p>
+          </div>
+          <div class="streamer-item">
+            <div class="streamer-thumb" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4)"></div>
+            <span class="live-dot">LIVE</span>
+            <p>푸르송</p>
+          </div>
+          <div class="streamer-item">
+            <div class="streamer-thumb" style="background:linear-gradient(135deg,#f97316,#ef4444)"></div>
+            <span class="live-dot">LIVE</span>
+            <p>김릉벅</p>
+          </div>
+          <div class="streamer-item">
+            <div class="streamer-thumb" style="background:linear-gradient(135deg,#10b981,#3b82f6)"></div>
+            <span class="live-dot">LIVE</span>
+            <p>채채슬</p>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- 메인 콘텐츠 -->
+    <section class="main-content">
+
+      <!-- 히어로 배너 -->
+      <div class="hero-banner">
+        <div class="hero-bg lostark-bg"></div>
+        <div class="hero-overlay">
+          <span class="hero-tag">LOST ARK</span>
+          <h1>로스트아크 전적 · 랭킹 · 일정<br>정보를 한눈에 확인하세요</h1>
+          <p>캐릭터 정보, 길드, 일정, 통계, 인기 검색 정보를 직관적으로 제공합니다.</p>
+          <div class="hero-btns">
+            <a href="#" class="btn btn-white">
+              캐릭터 검색
+              <svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#" class="btn btn-ghost">패치노트 보기</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 커뮤니티 배너 -->
+      <div class="content-card banner-card">
+        <div class="banner-row">
+          <div>
+            <span class="card-tag">COMMUNITY</span>
+            <h2>유저와 함께 만드는<br>로스트아크 페이지</h2>
+            <p>캐릭터 데이터, 일정표, 통계, 랭킹을 카드 형태로 정리했습니다.</p>
+          </div>
+          <a href="#" class="btn btn-primary sm">바로가기</a>
+        </div>
+      </div>
+
+      <!-- 주간 일정표 -->
+      <div class="content-card">
+        <div class="card-head">
+          <div>
+            <span class="card-tag">WEEKLY SCHEDULE</span>
+            <h2>주간 일정표</h2>
+          </div>
+          <button class="toggle-btn">지난 일정 숨김</button>
+        </div>
+
+        <div class="day-tabs">
+          <button class="day-tab">월</button>
+          <button class="day-tab">화</button>
+          <button class="day-tab active">수</button>
+          <button class="day-tab">목</button>
+          <button class="day-tab">금</button>
+          <button class="day-tab weekend">토</button>
+          <button class="day-tab weekend">일</button>
+        </div>
+
+        <div class="schedule-block">
+          <div class="sched-time">23:00</div>
+          <div class="sched-cards">
+            <article class="sched-card">
+              <div class="sched-thumb" style="background:linear-gradient(135deg,#86efac,#60a5fa)"></div>
+              <h5>하모니 섬</h5>
+              <span class="reward-pill">보상 +6</span>
+            </article>
+            <article class="sched-card">
+              <div class="sched-thumb" style="background:linear-gradient(135deg,#818cf8,#c084fc)"></div>
+              <h5>고요한 안식의 섬</h5>
+              <span class="reward-pill">보상 +4</span>
+            </article>
+            <article class="sched-card">
+              <div class="sched-thumb" style="background:linear-gradient(135deg,#60a5fa,#34d399)"></div>
+              <h5>쿵덕쿵 아일랜드</h5>
+              <span class="reward-pill">보상 +3</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="schedule-block">
+          <div class="sched-time">22:50</div>
+          <div class="chaos-row">
+            <div class="chaos-icon"></div>
+            <div class="chaos-info">
+              <strong>카오스 게이트</strong>
+              <p>13개 지역 중 랜덤 등장</p>
+            </div>
+            <span class="reward-pill accent">보상 +29</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 오른쪽 사이드바 -->
+    <aside class="sidebar sidebar-right">
+
+      <div class="side-card promo-yellow">
+        <p class="side-mini">OPEN CHAT</p>
+        <h3>오픈채팅</h3>
+        <p class="side-desc">수다 · 거래 · 정보공유</p>
+      </div>
+
+      <div class="side-card">
+        <div class="side-card-head">
+          <h4>로아와 공지</h4>
+        </div>
+        <ul class="simple-list">
+          <li>
+            <span>도표, 사전형 작업 진행중</span>
+            <em>26일 전</em>
+          </li>
+          <li>
+            <span>리뉴얼 테스트 오픈</span>
+            <em>1개월 전</em>
+          </li>
+        </ul>
+      </div>
+
+      <div class="side-card">
+        <div class="side-card-head">
+          <h4>인기 검색 캐릭터</h4>
+        </div>
+        <ol class="rank-list">
+          <li>
+            <span class="rank-num top">1</span>
+            <span class="rank-name">AV탑검</span>
+            <strong class="rank-count">6,613</strong>
+          </li>
+          <li>
+            <span class="rank-num">2</span>
+            <span class="rank-name">농가루</span>
+            <strong class="rank-count">3,084</strong>
+          </li>
+          <li>
+            <span class="rank-num">3</span>
+            <span class="rank-name">불가루</span>
+            <strong class="rank-count">2,851</strong>
+          </li>
+          <li>
+            <span class="rank-num">4</span>
+            <span class="rank-name">이다</span>
+            <strong class="rank-count">2,557</strong>
+          </li>
+          <li>
+            <span class="rank-num">5</span>
+            <span class="rank-name">xnakki</span>
+            <strong class="rank-count">2,274</strong>
+          </li>
+        </ol>
+      </div>
+
+      <div class="side-card">
+        <div class="side-card-head">
+          <h4>서버 정보</h4>
+        </div>
+        <div class="server-grid">
+          <div class="server-item">
+            <span>루페온</span>
+            <strong>750,208</strong>
+          </div>
+          <div class="server-item">
+            <span>실리안</span>
+            <strong>549,774</strong>
+          </div>
+          <div class="server-item">
+            <span>아만</span>
+            <strong>553,316</strong>
+          </div>
+          <div class="server-item">
+            <span>카단</span>
+            <strong>560,157</strong>
+          </div>
+          <div class="server-item">
+            <span>카제로스</span>
+            <strong>545,034</strong>
+          </div>
+          <div class="server-item">
+            <span>니나브</span>
+            <strong>479,523</strong>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- 플로팅 채팅 버튼 -->
+  <button class="chat-fab" id="chatBtn" aria-label="상담 문의" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <div class="chat-modal" id="chatModal" role="dialog" aria-label="상담 문의" aria-hidden="true">
+    <div class="cm-head">
+      <div class="cm-title-row">
+        <span class="cm-online"></span>
+        <h4>상담 문의</h4>
+      </div>
+      <button class="cm-close" id="chatClose" aria-label="닫기">
+        <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="cm-body">
+      <p>문의 내용을 남겨주세요. 빠르게 답변드리겠습니다.</p>
+      <textarea placeholder="내용을 입력해주세요." rows="4"></textarea>
+      <button class="btn btn-primary full">문의 보내기</button>
+    </div>
+  </div>
+
+  <script src="/js/lostark.js"></script>
+</body>
+</html>
