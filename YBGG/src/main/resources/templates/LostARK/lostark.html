@@ -4,75 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YB.GG — 로스트아크</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700;9..40,800&family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/Common.css" />
   <link rel="stylesheet" href="/css/lostark.css" />
 </head>
 <body>
-
   <!-- ────────── 헤더 ────────── -->
-  <header class="header">
-    <div class="header-top">
-      <div class="header-left">
-        <a href="index.html" class="logo">YB<span>.GG</span></a>
-        <span class="game-chip">
-          <span class="chip-dot"></span>
-          LOST ARK
-        </span>
-      </div>
-
-      <div class="header-search">
-        <svg class="search-icon" viewBox="0 0 20 20" fill="none" width="16" height="16">
-          <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.6"/>
-          <path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-        <input type="text" placeholder="캐릭터명을 검색해보세요..." />
-        <button class="search-btn">검색</button>
-      </div>
-
-      <div class="header-right">
-        <div class="hdr-dropdown" id="gameMenu">
-          <button class="hdr-btn" aria-haspopup="true" aria-expanded="false">
-            게임 선택
-            <svg viewBox="0 0 10 6" fill="none" width="10" height="6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <ul class="hdr-menu">
-            <li><a href="lostark.html"><span class="dot" style="--c:#3b82f6"></span>로스트아크</a></li>
-            <li><a href="#"><span class="dot" style="--c:#06b6d4"></span>로스트아크 모바일</a></li>
-          </ul>
-        </div>
-
-        <div class="hdr-dropdown" id="langMenu">
-          <button class="hdr-btn" aria-haspopup="true" aria-expanded="false">
-            🌐 한국어
-            <svg viewBox="0 0 10 6" fill="none" width="10" height="6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <ul class="hdr-menu lang-menu">
-            <li data-lang="ko">🇰🇷 한국어</li>
-            <li data-lang="en">🇺🇸 English</li>
-            <li data-lang="ja">🇯🇵 日本語</li>
-          </ul>
-        </div>
-
-        <a href="#" class="hdr-ghost-btn">로그인</a>
-        <a href="#" class="hdr-solid-btn">회원가입</a>
-      </div>
-    </div>
-
-    <!-- 게임 내 탭 네비 -->
-    <nav class="game-nav" aria-label="게임 내 메뉴">
-      <a href="#" class="gnav-link active">홈</a>
-      <a href="#" class="gnav-link">캐릭터</a>
-      <a href="#" class="gnav-link">길드</a>
-      <a href="#" class="gnav-link">순위</a>
-      <a href="#" class="gnav-link">통계</a>
-      <a href="#" class="gnav-link">시세</a>
-      <a href="#" class="gnav-link">패치</a>
-      <a href="#" class="gnav-link">미니게임</a>
-      <a href="#" class="gnav-link">커뮤니티</a>
-    </nav>
-  </header>
+  <div th:replace="~{header :: header('lostark', 'home')}"></div>
 
   <!-- ────────── 메인 레이아웃 ────────── -->
   <main class="page-layout">
@@ -378,7 +316,12 @@
       <button class="btn btn-primary full">문의 보내기</button>
     </div>
   </div>
+  
+  <div th:replace="~{footer :: footer}"></div>
 
+
+	
   <script src="/js/lostark.js"></script>
+  <script th:src="@{/js/common.js}"></script>
 </body>
 </html>

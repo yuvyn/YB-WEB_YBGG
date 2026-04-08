@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--
+  =============================================
+  YB.GG 공통 헤더 Fragment
+  사용법:
+    <div th:replace="~{fragments/header :: header(game='lostark', page='home')}"></div>
+
+  game 파라미터:
+    'none'           → 메인 페이지 (칩 없음)
+    'lostark'        → 로스트아크
+    'lostark-mobile' → 로스트아크 모바일
+
+  page 파라미터:
+    'home' | 'character' | 'guild' | 'rank' |
+    'stats' | 'price' | 'patch' | 'minigame' | 'community'
+  =============================================
+-->
+
+<header th:fragment="header(game, page)" class="header" th:attr="data-game=${game}">
+  <div class="header-top">
+
+    <!-- 로고 + 게임 칩 -->
+    <div class="header-left">
+      <a th:href="@{/}" class="logo">YB<span>.GG</span></a>
+
+      <!-- 게임 칩: game != 'none' 일 때만 표시 -->
+      <span class="game-chip" th:unless="${game == 'none'}">
+        <span class="chip-dot"></span>
+        <span class="chip-label"
+              th:text="${game == 'lostark'} ? 'LOST ARK' :
+                        (${game == 'lostark-mobile'} ? 'LOST ARK MOBILE' :
+                        ${game})">
+          LOST ARK
+        </span>
+      </span>
+    </div>
+
+    <!-- 검색바 -->
+    <div class="header-search">
+      <svg class="search-icon" viewBox="0 0 20 20" fill="none" width="16" height="16">
+        <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <input id="headerSearchInput" type="text"
+             placeholder="캐릭터명을 검색해보세요..."
+             autocomplete="off" />
+      <button class="search-btn" id="headerSearchBtn">검색</button>
+    </div>
+
+    <!-- 우측 버튼 그룹 -->
+    <div class="header-right">
+
+      <!-- 게임 선택 드롭다운 -->
+      <div class="hdr-dropdown" id="hdrGameMenu">
+        <button class="hdr-btn" aria-haspopup="true" aria-expanded="false">
+          게임 선택
+          <svg viewBox="0 0 10 6" fill="none" width="10" height="6">
+            <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <ul class="hdr-menu">
+          <li th:classappend="${game == 'lostark'} ? 'current-game'">
+            <a th:href="@{/lostark}">
+              <span class="dot" style="--c:#3b82f6"></span>로스트아크
+            </a>
+          </li>
+          <li th:classappend="${game == 'lostark-mobile'} ? 'current-game'">
+            <a th:href="@{/lostark-mobile}">
+              <span class="dot" style="--c:#10b981"></span>로스트아크 모바일
+            </a>
+          </li>
+          <!-- 게임 추가 시 여기에 li 추가 -->
+        </ul>
+      </div>
+
+      <!-- 언어 선택 -->
+      <div class="hdr-dropdown" id="hdrLangMenu">
+        <button class="hdr-btn" aria-haspopup="true" aria-expanded="false">
+          🌐 <span class="lang-text">한국어</span>
+          <svg viewBox="0 0 10 6" fill="none" width="10" height="6">
+            <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <ul class="hdr-menu lang-menu">
+          <li data-lang="ko">🇰🇷 한국어</li>
+          <li data-lang="en">🇺🇸 English</li>
+          <li data-lang="ja">🇯🇵 日本語</li>
+        </ul>
+      </div>
+
+      <a href="#" class="hdr-ghost-btn">로그인</a>
+
+      <!-- 커뮤니티 페이지: 글쓰기 / 나머지: 회원가입 -->
+      <a th:href="${page == 'community'} ? '#write' : '#signup'"
+         class="hdr-solid-btn">
+        <svg th:if="${page == 'community'}"
+             viewBox="0 0 16 16" fill="none" width="13" height="13">
+          <path d="M8 1v6M5 4l3-3 3 3M3 9v4a1 1 0 001 1h8a1 1 0 001-1V9"
+                stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span th:text="${page == 'community'} ? '글쓰기' : '회원가입'">회원가입</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- 게임 탭 네비 -->
+  <nav class="game-nav" th:unless="${game == 'none'}" aria-label="게임 내 메뉴">
+
+    <!-- 로스트아크 탭 -->
+    <th:block th:if="${game == 'lostark'}">
+      <a th:href="@{/lostark}"           class="gnav-link" th:classappend="${page == 'home'}      ? ' active'">홈</a>
+      <a th:href="@{/lostark/character}" class="gnav-link" th:classappend="${page == 'character'} ? ' active'">캐릭터</a>
+      <a th:href="@{/lostark/guild}"     class="gnav-link" th:classappend="${page == 'guild'}     ? ' active'">길드</a>
+      <a th:href="@{/lostark/rank}"      class="gnav-link" th:classappend="${page == 'rank'}      ? ' active'">순위</a>
+      <a th:href="@{/lostark/stats}"     class="gnav-link" th:classappend="${page == 'stats'}     ? ' active'">통계</a>
+      <a th:href="@{/lostark/price}"     class="gnav-link" th:classappend="${page == 'price'}     ? ' active'">시세</a>
+      <a th:href="@{/lostark/patch}"     class="gnav-link" th:classappend="${page == 'patch'}     ? ' active'">패치</a>
+      <a th:href="@{/lostark/minigame}"  class="gnav-link" th:classappend="${page == 'minigame'}  ? ' active'">미니게임</a>
+      <a th:href="@{/lostark/community}" class="gnav-link" th:classappend="${page == 'community'} ? ' active'">커뮤니티</a>
+    </th:block>
+
+    <!-- 로스트아크 모바일 탭 -->
+    <th:block th:if="${game == 'lostark-mobile'}">
+      <a th:href="@{/lostark-mobile}"           class="gnav-link" th:classappend="${page == 'home'}      ? ' active'">홈</a>
+      <a th:href="@{/lostark-mobile/character}" class="gnav-link" th:classappend="${page == 'character'} ? ' active'">캐릭터</a>
+      <a th:href="@{/lostark-mobile/gear}"      class="gnav-link" th:classappend="${page == 'gear'}      ? ' active'">장비</a>
+      <a th:href="@{/lostark-mobile/rank}"      class="gnav-link" th:classappend="${page == 'rank'}      ? ' active'">랭킹</a>
+      <a th:href="@{/lostark-mobile/guild}"     class="gnav-link" th:classappend="${page == 'guild'}     ? ' active'">길드</a>
+      <a th:href="@{/lostark-mobile/stats}"     class="gnav-link" th:classappend="${page == 'stats'}     ? ' active'">통계</a>
+      <a th:href="@{/lostark-mobile/news}"      class="gnav-link" th:classappend="${page == 'news'}      ? ' active'">소식</a>
+      <a th:href="@{/lostark-mobile/community}" class="gnav-link" th:classappend="${page == 'community'} ? ' active'">커뮤니티</a>
+    </th:block>
+
+    <!-- 새 게임 추가 시 th:block th:if 추가 -->
+
+  </nav>
+</header>
+
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YB.GG — 로스트아크 커뮤니티</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700;9..40,800&family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/Common.css" />
+  <link rel="stylesheet" href="/css/lostark_community.css" />
+</head>
+<body>
+
+  <!-- ── 헤더 ── -->
+  <div th:replace="~{header :: header('lostark', 'community')}"></div>
+
+  <!-- ── 커뮤니티 히어로 배너 ── -->
+  <div class="community-hero">
+    <div class="ch-bg"></div>
+    <div class="ch-inner">
+      <div class="ch-game-info">
+        <div class="ch-logo-box">
+          <div class="ch-logo-box"
+		     th:style="'background-image: url(' + @{/img/LostARK.jfif} + '); background-size: cover; background-position: center;'">
+		  </div>
+        </div>
+        <div>
+          <h1>로스트아크</h1>
+          <p>PC</p>
+        </div>
+      </div>
+      <a href="#" class="write-hero-btn">
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 1v6M5 4l3-3 3 3M3 9v4a1 1 0 001 1h8a1 1 0 001-1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        게시글 작성하기
+      </a>
+    </div>
+  </div>
+
+  <!-- ── 커뮤니티 서브탭 ── -->
+  <div class="comm-tabs-wrap">
+    <div class="comm-tabs-inner">
+      <div class="comm-tabs">
+        <button class="ctab active" data-tab="all">
+          <span class="ctab-live">LIVE</span>전체
+        </button>
+        <button class="ctab" data-tab="board">게시판</button>
+        <button class="ctab" data-tab="db">DB</button>
+        <button class="ctab" data-tab="video">영상</button>
+        <button class="ctab" data-tab="lck">스트리머 영상</button>
+      </div>
+      <a href="#" class="comm-join-btn">+ 커뮤니티 가입하기</a>
+    </div>
+  </div>
+
+  <!-- ── 메인 레이아웃 ── -->
+  <main class="comm-layout">
+
+    <!-- 피드 영역 -->
+    <section class="feed-col">
+
+      <!-- 추천 라이브 -->
+      <div class="feed-section">
+        <div class="feed-sec-head">
+          <h3>
+            <span class="live-badge-sm">LIVE</span>
+            로스트아크 추천 라이브
+          </h3>
+          <a href="#" class="more-link">더보기 ›</a>
+        </div>
+        <div class="live-scroll-wrap">
+          <div class="live-cards">
+            <div class="live-card">
+              <div class="lc-thumb" style="background:linear-gradient(135deg,#1e3a5f,#0f172a)">
+                <span class="lc-live">LIVE</span>
+                <span class="lc-viewers">3명</span>
+                <div class="lc-overlay"></div>
+              </div>
+              <p class="lc-title">LCK 챌린저 챌린지 월드 슬로랭크 ^...</p>
+              <span class="lc-author">크렉 ●</span>
+            </div>
+            <div class="live-card">
+              <div class="lc-thumb" style="background:linear-gradient(135deg,#1a3a28,#0f2820)">
+                <span class="lc-viewers">131명</span>
+                <div class="lc-overlay"></div>
+              </div>
+              <p class="lc-title">챌린저 승격전</p>
+              <span class="lc-author">이성진123</span>
+            </div>
+            <div class="live-card">
+              <div class="lc-thumb" style="background:linear-gradient(135deg,#2d1b4e,#1a0f2e)">
+                <span class="lc-live">LIVE</span>
+                <span class="lc-viewers">입장</span>
+                <div class="lc-count-box">
+                  <strong>10</strong>
+                  <span>판매 제한</span>
+                </div>
+                <div class="lc-overlay"></div>
+              </div>
+              <p class="lc-title">실4에서 실3까지 노방중 7일차..(남S3)</p>
+              <span class="lc-author">파티미라은연애</span>
+            </div>
+            <div class="live-card">
+              <div class="lc-thumb" style="background:linear-gradient(135deg,#3d1f0a,#1a0f05)">
+                <span class="lc-live">LIVE</span>
+                <div class="lc-overlay"></div>
+              </div>
+              <p class="lc-title">다이아 솔랭 스트리밍 중</p>
+              <span class="lc-author">골드솔로</span>
+            </div>
+            <div class="live-card">
+              <div class="lc-thumb" style="background:linear-gradient(135deg,#1e3a5f,#162d4a)">
+                <span class="lc-viewers">87명</span>
+                <div class="lc-overlay"></div>
+              </div>
+              <p class="lc-title">플레티넘 랭크 도전기</p>
+              <span class="lc-author">하늘공원</span>
+            </div>
+          </div>
+          <button class="scroll-arrow right" id="liveScrollRight">›</button>
+        </div>
+      </div>
+
+      <!-- 광고 배너 -->
+      <div class="ad-banner">
+        <div class="ad-inner">
+          <span class="ad-tag">AD</span>
+          <p>천천히 키우다, <strong>장세기건 키우기</strong></p>
+          <span class="ad-more">게임 앱으로 이동 ›</span>
+        </div>
+      </div>
+
+      <!-- 라운지 최신 글 -->
+      <div class="feed-section">
+        <div class="feed-sec-head">
+          <h3>라운지 최신 글</h3>
+          <a href="#" class="more-link">더보기 ›</a>
+        </div>
+        <div class="post-grid" id="postGrid">
+          <!-- 왼쪽 컬럼 -->
+          <div class="post-col">
+            <div class="post-item hot">
+              <span class="post-badge new">N</span>
+              <span class="post-title">픽넷 근대가는거봐라 ■■■■■■■■■■■■...</span>
+              <div class="post-meta">
+                <span class="post-author">닥터비브라운</span>
+                <span class="post-stat">💬 2</span>
+                <span class="post-stat">👁 107</span>
+              </div>
+            </div>
+            <div class="post-item">
+              <span class="post-title">리그에서 티워이 갠지 이긴적 없냐요?</span>
+              <div class="post-meta">
+                <span class="post-author">부드리온 Lv1 6882</span>
+                <span class="post-stat">💬 1</span>
+                <span class="post-stat">👁 426</span>
+              </div>
+            </div>
+            <div class="post-item">
+              <span class="post-title">기인 타워 8%확정 ■■■■■■■■■■■■■■...</span>
+              <div class="post-meta">
+                <span class="post-author">파나시진파나</span>
+                <span class="post-stat">👁 333</span>
+              </div>
+            </div>
+            <div class="post-item">
+              <span class="post-badge fire">🔥</span>
+              <span class="post-title">녀절금이다 초비에어한 탁한중필 ●</span>
+              <div class="post-meta">
+                <span class="post-author">3725278 15</span>
+                <span class="post-stat">👁 172</span>
+              </div>
+            </div>
+            <div class="post-item">
+              <span class="post-title">졸전군가 픽셀 고트는 페이커다</span>
+              <div class="post-meta">
+                <span class="post-author">3725278 16</span>
+                <span class="post-stat">💬 3</span>
+                <span class="post-stat">👁 280</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 오른쪽 컬럼 -->
+          <div class="post-col">
+            <div class="post-item">
+              <span class="post-title">돈글로이 탈세를 음주운전이랑 비교하다니</span>
+              <div class="post-meta">
+                <span class="post-author">Soule</span>
+                <span class="post-stat">👁 186</span>
+              </div>
+            </div>
+            <div class="post-item hot">
+              <span class="post-badge hot-tag">HOT</span>
+              <span class="post-title">클봇이 부적절한 내용을 감지했습니다.</span>
+              <div class="post-meta">
+                <span class="post-author">전략의 일검 2404</span>
+                <span class="post-stat">💬 10</span>
+              </div>
+            </div>
+            <div class="post-item">
+              <span class="post-title">클봇이 부적절한 내용을 감지했습니다.</span>
+              <div class="post-meta">
+                <span class="post-author">패시브아이디어</span>
+                <span class="post-stat">👁 44</span>
+              </div>
+            </div>
+            <div class="post-item">
+              <span class="post-badge new">N</span>
+              <span class="post-title">글랩 은퇴확정 ■■■■■■■■■■■■■■■■</span>
+              <div class="post-meta">
+                <span class="post-author">닥터비브라운</span>
+                <span class="post-stat">💬 1</span>
+                <span class="post-stat">👁 460</span>
+              </div>
+            </div>
+            <div class="post-item">
+              <span class="post-title">난 GPT 안쓰고 copilot 쓰는데</span>
+              <div class="post-meta">
+                <span class="post-author">깃고싶은오솔길 1719</span>
+                <span class="post-stat">💬 2</span>
+                <span class="post-stat">👁 346</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 포인트 퀘스트 -->
+      <div class="feed-section">
+        <div class="feed-sec-head">
+          <h3>
+            <span class="npay-badge">N<span>pay</span></span>
+            포인트 퀘스트
+          </h3>
+          <button class="share-btn">
+            <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><circle cx="13" cy="3" r="2" stroke="currentColor" stroke-width="1.5"/><circle cx="3" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/><circle cx="13" cy="13" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 7l6-3M5 9l6 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            공유
+          </button>
+        </div>
+
+        <div class="quest-tabs">
+          <button class="qtab active">포인트 모으기</button>
+          <button class="qtab">포인트 상점</button>
+        </div>
+
+        <div class="quest-grid">
+          <div class="quest-item">
+            <div class="quest-thumb" style="background:linear-gradient(135deg,#2563eb,#7c3aed)">
+              <span class="quest-platform">구글</span>
+            </div>
+            <div class="quest-info">
+              <p>유독으로 AI구독까지</p>
+              <span>구글AI프로 구독하면</span>
+            </div>
+            <span class="quest-reward">6,300원 받기</span>
+          </div>
+          <div class="quest-item">
+            <div class="quest-thumb" style="background:linear-gradient(135deg,#0ea5e9,#7c3aed)">
+              <span class="quest-platform">SK</span>
+            </div>
+            <div class="quest-info">
+              <p>SK브로드밴드</p>
+              <span>2시간동안 심사하면</span>
+            </div>
+            <span class="quest-reward red">1,200원 받기</span>
+          </div>
+          <div class="quest-item">
+            <div class="quest-thumb" style="background:linear-gradient(135deg,#ef4444,#f97316)">
+              <span class="quest-platform">유튜브</span>
+            </div>
+            <div class="quest-info">
+              <p>유독은 다이소까지</p>
+              <span>유튜브 프리미엄 구독하면</span>
+            </div>
+            <span class="quest-reward">5,800원 받기</span>
+          </div>
+          <div class="quest-item">
+            <div class="quest-thumb" style="background:linear-gradient(135deg,#10b981,#0ea5e9)">
+              <span class="quest-platform">메가</span>
+            </div>
+            <div class="quest-info">
+              <p>유독은 메가커피까지</p>
+              <span>유튜브 프리미엄 구독하면</span>
+            </div>
+            <span class="quest-reward">6,300원 받기</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 챔피언 랭킹 -->
+      <div class="feed-section">
+        <div class="feed-sec-head">
+          <h3>클래스 티어</h3>
+          <a href="#" class="more-link">더보기 ›</a>
+        </div>
+        <div class="champ-scroll">
+          <div class="champ-cards" id="champCards">
+            <div class="champ-card">
+              <div class="champ-thumb" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">
+                <span class="tier-badge s">S</span>
+              </div>
+              <p>버서커</p>
+              <span class="champ-role atk">딜러</span>
+            </div>
+            <div class="champ-card">
+              <div class="champ-thumb" style="background:linear-gradient(135deg,#dc2626,#991b1b)">
+                <span class="tier-badge s">S</span>
+              </div>
+              <p>소서리스</p>
+              <span class="champ-role mage">마법</span>
+            </div>
+            <div class="champ-card">
+              <div class="champ-thumb" style="background:linear-gradient(135deg,#0ea5e9,#0369a1)">
+                <span class="tier-badge a">A</span>
+              </div>
+              <p>스크래퍼</p>
+              <span class="champ-role atk">딜러</span>
+            </div>
+            <div class="champ-card">
+              <div class="champ-thumb" style="background:linear-gradient(135deg,#16a34a,#15803d)">
+                <span class="tier-badge s">S</span>
+              </div>
+              <p>바드</p>
+              <span class="champ-role sup">서포터</span>
+            </div>
+            <div class="champ-card">
+              <div class="champ-thumb" style="background:linear-gradient(135deg,#d97706,#b45309)">
+                <span class="tier-badge a">A</span>
+              </div>
+              <p>건슬링어</p>
+              <span class="champ-role atk">딜러</span>
+            </div>
+            <div class="champ-card">
+              <div class="champ-thumb" style="background:linear-gradient(135deg,#9333ea,#6d28d9)">
+                <span class="tier-badge b">B</span>
+              </div>
+              <p>아르카나</p>
+              <span class="champ-role mage">마법</span>
+            </div>
+            <div class="champ-card">
+              <div class="champ-thumb" style="background:linear-gradient(135deg,#0f766e,#0d9488)">
+                <span class="tier-badge a">A</span>
+              </div>
+              <p>홀리나이트</p>
+              <span class="champ-role sup">서포터</span>
+            </div>
+            <div class="champ-card">
+              <div class="champ-thumb" style="background:linear-gradient(135deg,#be123c,#9f1239)">
+                <span class="tier-badge b">B</span>
+              </div>
+              <p>워로드</p>
+              <span class="champ-role tank">탱커</span>
+            </div>
+          </div>
+          <button class="scroll-arrow right" id="champScrollRight">›</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 우측 사이드바 -->
+    <aside class="comm-sidebar">
+
+      <!-- 채널 -->
+      <div class="side-card">
+        <div class="side-card-head"><h4>채널</h4></div>
+        <div class="channel-list">
+          <a href="#" class="ch-link">인벤</a>
+          <a href="#" class="ch-link">dcinside</a>
+          <a href="#" class="ch-link accent">OP.GG</a>
+        </div>
+      </div>
+
+      <!-- 전적 검색 -->
+      <div class="side-card search-card">
+        <div class="side-card-head"><h4>전적 검색</h4></div>
+        <p class="side-desc">모든 소환사의 승률과 KDA 등 상세 전적을 확인하실 수 있습니다.</p>
+        <a href="#" class="btn-search-full">
+          <svg viewBox="0 0 20 20" fill="none" width="14" height="14">
+            <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          전적 검색하기
+        </a>
+      </div>
+
+      <!-- 이 게임의 카드 -->
+      <div class="side-card">
+        <div class="side-card-head"><h4>이 게임의 카드</h4></div>
+        <div class="tag-cloud">
+          <a href="#" class="tag">라이엇 게임즈</a>
+          <a href="#" class="tag">리그오브레전드</a>
+          <a href="#" class="tag">e스포츠</a>
+          <a href="#" class="tag accent-tag">전략</a>
+          <a href="#" class="tag">AOS</a>
+          <a href="#" class="tag">MOBA</a>
+        </div>
+      </div>
+
+      <!-- 설치 및 구매 -->
+      <div class="side-card">
+        <div class="side-card-head"><h4>설치 및 구매</h4></div>
+        <div class="store-btn-row">
+          <a href="#" class="store-btn">
+            <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="currentColor" stroke-width="1.8"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            공식 사이트
+          </a>
+        </div>
+      </div>
+
+      <!-- 요약 정보 -->
+      <div class="side-card">
+        <div class="side-card-head"><h4>요약 정보</h4></div>
+        <p class="summary-text">리그 오브 레전드는 세계 최고의 MOBA(Multiplayer Online Battle Arena) 게임입니다. 끝없이 이어지는 실시간 전두와 협동을 요한 팀플레이, RTS와 RPG를 하나의 게임에...</p>
+        <div class="summary-media">
+          <div class="summary-thumb" style="background:linear-gradient(135deg,#1e3a5f,#0f172a)"></div>
+          <button class="sm-play">▶</button>
+        </div>
+        <table class="info-table">
+          <tr><td>출시</td><td>2011.12.04</td></tr>
+          <tr><td>개발</td><td><a href="#">공식사이트 트루스</a></td></tr>
+          <tr><td>제작</td><td><a href="#">라이엇 게임즈</a></td></tr>
+          <tr><td>배급</td><td><a href="#">라이엇 게임즈</a></td></tr>
+          <tr><td>장르</td><td>MOBA</td></tr>
+          <tr><td>등급</td><td>12세이상 이용가</td></tr>
+          <tr><td>언어</td><td>한국어</td></tr>
+          <tr><td>소프트웨어</td><td>Windows, Mac<br>Windows 10 공용 (x64)</td></tr>
+        </table>
+      </div>
+
+    </aside>
+  </main>
+
+  <!-- 플로팅 -->
+  <button class="chat-fab" id="chatBtn" aria-label="상담 문의" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <div class="chat-modal" id="chatModal" role="dialog" aria-hidden="true">
+    <div class="cm-head">
+      <div class="cm-title-row">
+        <span class="cm-online"></span>
+        <h4>상담 문의</h4>
+      </div>
+      <button class="cm-close" id="chatClose">
+        <svg viewBox="0 0 14 14" fill="none" width="14" height="14"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="cm-body">
+      <p>문의 내용을 남겨주세요.</p>
+      <textarea placeholder="내용을 입력해주세요." rows="4"></textarea>
+      <button class="btn btn-primary full">문의 보내기</button>
+    </div>
+  </div>
+  
+  <div th:replace="~{footer :: footer}"></div>
+
+  <script src="/js/lostark_community.js"></script>
+  <script th:src="@{/js/common.js}"></script>
+</body>
+</html>

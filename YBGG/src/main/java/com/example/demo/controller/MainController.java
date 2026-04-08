@@ -24,4 +24,10 @@ public class MainController {
         model.addAttribute("title", "로스트아크 모바일");
         return "LostARK_MOB/lostark-mobile";
     }
+    
+    @GetMapping("/lostark/community")
+    public String lostark_community(Model model) {
+        model.addAttribute("title", "로스트아크");
+        return "LostARK/lostark_community";
+    }
 }
