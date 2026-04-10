@@ -350,7 +350,7 @@
    ============================================= */
 
 .site-footer {
-  background: #0c0c14;
+  background: rgb(240, 240, 240);
   color: rgba(255, 255, 255, 0.85);
   padding: 56px 0 0;
   margin-top: auto;
@@ -379,7 +379,7 @@
   font-size: 24px;
   font-weight: 800;
   letter-spacing: -0.06em;
-  color: #fff;
+  color: #000;
   text-decoration: none;
   margin-bottom: 14px;
 }
@@ -393,7 +393,7 @@
 
 .footer-tagline {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.45);
+  color: #000;
   line-height: 1.7;
   margin-bottom: 20px;
 }
@@ -412,7 +412,7 @@
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.6);
+  color: #000;
   text-decoration: none;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
@@ -420,7 +420,7 @@
 .social-btn:hover {
   background: rgba(255, 255, 255, 0.14);
   color: #fff;
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: #000;
 }
 
 /* 링크 그리드 */
@@ -433,7 +433,7 @@
 .footer-col h5 {
   font-size: 13px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.95);
+  color: #000;
   letter-spacing: 0.05em;
   margin-bottom: 14px;
 }
@@ -449,17 +449,17 @@
 
 .footer-col ul li a {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.45);
+  color: #000;
   text-decoration: none;
   transition: color 0.15s;
 }
 
-.footer-col ul li a:hover { color: rgba(255, 255, 255, 0.9); }
+.footer-col ul li a:hover { color: #000; }
 
 /* 구분선 */
 .footer-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.07);
+  background: #000;
 }
 
 /* 하단 */
@@ -475,14 +475,14 @@
 
 .footer-copy {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.55);
+  color: #000;
   margin-bottom: 6px;
   font-weight: 600;
 }
 
 .footer-disclaimer {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.28);
+  color: #000;
   line-height: 1.7;
 }
 
@@ -495,17 +495,17 @@
 
 .footer-misc a {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.38);
+  color: #000;
   text-decoration: none;
   transition: color 0.15s;
   white-space: nowrap;
 }
 
-.footer-misc a:hover { color: rgba(255, 255, 255, 0.75); }
+.footer-misc a:hover { color: #000; }
 
 .footer-misc span {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.18);
+  color: #000;
 }
 
 /* =============================================
