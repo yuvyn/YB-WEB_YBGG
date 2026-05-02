@@ -91,30 +91,39 @@
   }
 
   function bindSearch() {
-    const input   = document.getElementById("headerSearchInput");
-    const btn     = document.getElementById("headerSearchBtn");
-    const header  = document.querySelector(".header");
-    const gameKey = header ? (header.dataset.game || "") : "";
+    const input = document.getElementById("headerSearchInput");
+    const btn = document.getElementById("headerSearchBtn");
+    const header = document.querySelector(".header");
+
     function doSearch() {
       const q = input ? input.value.trim() : "";
       if (!q) {
-        if (input) {
-          input.style.borderColor = "#f87171";
-          input.style.boxShadow   = "0 0 0 3px rgba(239,68,68,0.1)";
-          setTimeout(function () {
-            input.style.borderColor = "";
-            input.style.boxShadow   = "";
-          }, 1000);
-        }
+        alert("캐릭터명을 입력해주세요.");
+        if (input) input.focus();
         return;
       }
-      // TODO: window.location.href = `/search?game=${gameKey}&q=${encodeURIComponent(q)}`;
-      console.log("[" + gameKey + "] 검색:", q);
+
+      const gameKey = header ? (header.dataset.game || "") : "";
+
+      if (gameKey === "lostark" || gameKey === "lostark-mobile") {
+        window.location.href = "/lostark/character/" + encodeURIComponent(q);
+      } else {
+        window.location.href = "/search?q=" + encodeURIComponent(q);
+      }
     }
-    if (btn)   btn.addEventListener("click", doSearch);
-    if (input) input.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") doSearch();
-    });
+
+    if (btn) {
+      btn.addEventListener("click", doSearch);
+    }
+
+    if (input) {
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          doSearch();
+        }
+      });
+    }
   }
 
 })();

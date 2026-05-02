@@ -13,12 +13,6 @@ public class MainController {
         return "Main";
     }
     
-    @GetMapping("/lostark")
-    public String losstark(Model model) {
-        model.addAttribute("title", "로스트아크");
-        return "LostARK/lostark";
-    }
-    
     @GetMapping("/lostark_MOB")
     public String lostark_MOB(Model model) {
         model.addAttribute("title", "로스트아크 모바일");
@@ -28,6 +22,6 @@ public class MainController {
     @GetMapping("/lostark/community")
     public String lostark_community(Model model) {
         model.addAttribute("title", "로스트아크");
-        return "LostARK/lostark_community";
+        return "LostARK/Lostark_community";
     }
 }

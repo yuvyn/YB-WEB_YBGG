@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title th:text="${name != null} ? ${name} + ' — YB.GG' : '캐릭터 조회 — YB.GG'">캐릭터 — YB.GG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/LostARK/lostark_Common.css}"/>
+  <link rel="stylesheet" th:href="@{/css/LostARK/Lostark_character.css}"/>
+</head>
+<body>
+<div th:replace="~{Header :: header('lostark', 'character')}"></div>
+
+<main class="char-page">
+
+  <!-- 에러 -->
+  <div th:if="${error}" class="error-wrap">
+    <div class="error-card">
+      <div class="error-emoji">🔍</div>
+      <h2>캐릭터를 찾을 수 없습니다</h2>
+      <p th:text="'&quot;' + ${name} + '&quot; 캐릭터가 존재하지 않거나 비공개 상태입니다.'"></p>
+      <a href="/lostark" class="btn-back">홈으로 돌아가기</a>
+    </div>
+  </div>
+
+  <th:block th:unless="${error}">
+
+    <!-- ══════════════════════════════════════
+         히어로 섹션
+    ══════════════════════════════════════ -->
+    <section class="char-hero">
+      <div class="hero-glow g1"></div>
+      <div class="hero-glow g2"></div>
+
+      <div class="hero-inner">
+
+        <!-- 프로필 카드 -->
+        <div class="char-card-wrap">
+          <div class="char-card-deco d1"></div>
+          <div class="char-card-deco d2"></div>
+          <div class="char-card">
+            <div class="char-card-top">
+              <span class="card-top-label">PROFILE CARD</span>
+              <span class="card-top-region" th:text="${armory?.armoryProfile?.serverName}">KR</span>
+            </div>
+            <div class="char-card-art">
+              <img th:if="${armory?.armoryProfile?.characterImage != null}"
+                   th:src="${armory.armoryProfile.characterImage}"
+                   th:alt="${armory?.armoryProfile?.characterName}"
+                   onerror="this.style.display='none'"/>
+              <div class="card-art-fallback">🎮</div>
+            </div>
+            <div class="char-card-body">
+              <h3 class="char-card-name" th:text="${armory?.armoryProfile?.characterName}">캐릭터명</h3>
+              <p  class="char-card-sub"  th:text="${armory?.armoryProfile?.characterClassName}">클래스</p>
+              <div class="char-card-stats">
+                <div class="ccs-item">
+                  <strong th:text="${armory?.armoryProfile?.itemAvgLevel}">0</strong>
+                  <span>아이템</span>
+                </div>
+                <div class="ccs-item">
+                  <strong th:text="${armory?.armoryProfile?.expeditionLevel}">0</strong>
+                  <span>원정대</span>
+                </div>
+                <div class="ccs-item">
+                  <strong th:text="${armory?.armoryProfile?.townLevel}">0</strong>
+                  <span>영지</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 캐릭터 정보 -->
+        <div class="char-info-block">
+          <div class="char-badges">
+            <span class="badge-server" th:text="${armory?.armoryProfile?.serverName}">서버</span>
+            <span class="badge-class"  th:text="${armory?.armoryProfile?.characterClassName}">클래스</span>
+            <span class="badge-lv">Lv.<strong th:text="${armory?.armoryProfile?.characterLevel}">0</strong></span>
+          </div>
+          <h1 class="char-name" th:text="${armory?.armoryProfile?.characterName}">캐릭터명</h1>
+          <div class="char-guild"
+               th:if="${armory?.armoryProfile?.guildName != null and armory?.armoryProfile?.guildName != ''}">
+            <svg viewBox="0 0 16 16" fill="none" width="12" height="12">
+              <path d="M8 1l2 4h4l-3 3 1 4-4-2-4 2 1-4L2 5h4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+            <span th:text="${armory.armoryProfile.guildName}">길드명</span>
+          </div>
+          <div class="stat-cards">
+            <div class="stat-card accent">
+              <span>아이템 레벨</span>
+              <strong th:text="${armory?.armoryProfile?.itemAvgLevel}">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>원정대 레벨</span>
+              <strong th:text="${armory?.armoryProfile?.expeditionLevel}">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>영지 레벨</span>
+              <strong th:text="${armory?.armoryProfile?.townLevel}">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 전투 특성 -->
+        <div class="battle-panel" th:if="${armory?.armoryProfile?.stats != null}">
+          <p class="battle-panel-title">전투 특성</p>
+          <div class="bp-list">
+            <div class="bp-row"
+                 th:each="stat : ${armory.armoryProfile.stats}"
+                 th:unless="${stat.type == '최대 생명력' or stat.type == '공격력'}">
+              <span class="bp-type" th:text="${stat.type}">특성</span>
+              <strong class="bp-val" th:text="${stat.value}">0</strong>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 원정대 -->
+    <div class="siblings-bar" th:if="${siblings != null and !#lists.isEmpty(siblings)}">
+      <div class="siblings-inner">
+        <span class="siblings-label">원정대 캐릭터 · <em th:text="${#lists.size(siblings)}">0</em>개</span>
+        <div class="siblings-scroll">
+          <a th:each="sib : ${siblings}"
+             th:href="@{/lostark/character/{n}(n=${sib.characterName})}"
+             class="sib-chip"
+             th:classappend="${sib.characterName == name} ? ' active' : ''">
+            <span class="sib-chip-class"  th:text="${sib.characterClassName}">클래스</span>
+            <span class="sib-chip-name"   th:text="${sib.characterName}">이름</span>
+            <span class="sib-chip-level"  th:text="'Lv.' + ${sib.itemAvgLevel}">Lv.0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         탭 바
+    ══════════════════════════════════════ -->
+    <div class="tab-bar">
+      <div class="tab-bar-inner">
+        <button class="tab active" data-target="equipment">장비</button>
+        <button class="tab"        data-target="skills">스킬</button>
+        <button class="tab"        data-target="engravings">각인</button>
+        <button class="tab"        data-target="gems">보석</button>
+        <button class="tab"        data-target="cards">카드</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         패널 영역
+    ══════════════════════════════════════ -->
+    <div class="panel-wrap">
+
+      <!-- ── 장비 탭 ── -->
+      <div class="panel active" id="panel-equipment">
+        <div class="equipment-layout">
+
+          <!-- 장비 슬롯 그리드 -->
+          <div class="equip-slots-wrap">
+            <h4 class="panel-section-title">장착 장비</h4>
+            <div class="equip-slots"
+                 th:if="${armory?.armoryEquipment != null and !#lists.isEmpty(armory.armoryEquipment)}">
+              <div class="equip-slot-item"
+                   th:each="item : ${armory.armoryEquipment}"
+                   th:classappend="${item.grade == '에스더'} ? ' grade-esther' :
+                                   (${item.grade == '고대'} ? ' grade-ancient' :
+                                   (${item.grade == '유물'} ? ' grade-relic' :
+                                   (${item.grade == '전설'} ? ' grade-legend' : ' grade-rare')))">
+                <div class="slot-icon-wrap">
+                  <img class="slot-icon"
+                       th:src="${item.icon}" th:alt="${item.name}"
+                       onerror="this.src='https://placehold.co/56x56/1a1a2e/555?text=?'"/>
+                  <span class="slot-grade-bar"></span>
+                </div>
+                <div class="slot-info">
+                  <span class="slot-type"  th:text="${item.type}">슬롯</span>
+                  <p    class="slot-name"  th:text="${item.name}">장비명</p>
+                  <span class="slot-grade" th:text="${item.grade}">등급</span>
+                </div>
+              </div>
+            </div>
+            <div th:if="${armory?.armoryEquipment == null}" class="empty-msg">장비 정보가 없습니다.</div>
+          </div>
+
+          <!-- 전투 스탯 상세 -->
+          <div class="combat-stats-wrap"
+               th:if="${armory?.armoryProfile?.stats != null}">
+            <h4 class="panel-section-title">기본 스탯</h4>
+            <div class="combat-stat-list">
+              <div class="combat-stat-row"
+                   th:each="stat : ${armory.armoryProfile.stats}">
+                <span class="csr-type" th:text="${stat.type}">타입</span>
+                <strong class="csr-val" th:text="${stat.value}">0</strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── 스킬 탭 ── -->
+      <div class="panel" id="panel-skills">
+        <div th:if="${armory?.armorySkills != null and !#lists.isEmpty(armory.armorySkills)}">
+          <h4 class="panel-section-title">사용 스킬</h4>
+          <div class="skills-layout">
+            <div class="skill-row"
+                 th:each="skill : ${armory.armorySkills}"
+                 th:if="${skill.level > 0}">
+              <div class="skill-icon-wrap">
+                <img th:src="${skill.icon}" th:alt="${skill.name}"
+                     onerror="this.src='https://placehold.co/48x48/1a1a2e/555?text=?'"/>
+                <span class="skill-lv-badge" th:text="${skill.level}">10</span>
+              </div>
+              <div class="skill-detail">
+                <div class="skill-name-row">
+                  <p class="skill-name" th:text="${skill.name}">스킬명</p>
+                  <!-- 룬 -->
+                  <div class="skill-rune-wrap" th:if="${skill.rune != null}">
+                    <img class="skill-rune-img"
+                         th:src="${skill.rune.icon}" th:alt="${skill.rune.name}"
+                         onerror="this.style.display='none'"/>
+                    <span class="skill-rune-name" th:text="${skill.rune.name}">룬</span>
+                  </div>
+                </div>
+                <!-- 트라이포드 -->
+                <div class="tripods" th:if="${skill.tripods != null and !#lists.isEmpty(skill.tripods)}">
+                  <div class="tripod-item"
+                       th:each="tp : ${skill.tripods}"
+                       th:if="${tp.isSelected}">
+                    <span th:text="${tp.name}">트라이포드</span>
+                    <em   th:text="'Lv.' + ${tp.level}">Lv.5</em>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div th:if="${armory?.armorySkills == null}" class="empty-msg">스킬 정보가 없습니다.</div>
+      </div>
+
+      <!-- ── 각인 탭 ── -->
+      <div class="panel" id="panel-engravings">
+        <div th:if="${armory?.armoryEngraving != null}">
+
+          <!-- 적용 각인 -->
+          <div th:if="${armory.armoryEngraving.engravings != null}">
+            <h4 class="panel-section-title">적용 각인</h4>
+            <div class="engraving-big-grid">
+              <div class="engraving-big-card"
+                   th:each="eng : ${armory.armoryEngraving.engravings}">
+                <div class="eng-icon-wrap">
+                  <img th:src="${eng.icon}" th:alt="${eng.name}"
+                       onerror="this.src='https://placehold.co/52x52/1a1a2e/555?text=?'"/>
+                  <span class="eng-lv-badge" th:text="'Lv.' + ${eng.level}">Lv.3</span>
+                </div>
+                <div class="eng-info">
+                  <p th:text="${eng.name}">각인명</p>
+                  <span th:if="${eng.description != null}"
+                        th:text="${eng.description}">설명</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 각인 효과 -->
+          <div th:if="${armory.armoryEngraving.effects != null}" style="margin-top:28px">
+            <h4 class="panel-section-title">각인 효과</h4>
+            <div class="effect-list">
+              <div class="effect-row" th:each="eff : ${armory.armoryEngraving.effects}">
+                <span class="eff-name" th:text="${eff.name}">효과명</span>
+                <p    class="eff-desc" th:text="${eff.description}">설명</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div th:if="${armory?.armoryEngraving == null}" class="empty-msg">각인 정보가 없습니다.</div>
+      </div>
+
+      <!-- ── 보석 탭 ── -->
+      <div class="panel" id="panel-gems">
+        <div th:if="${armory?.armoryGem != null}">
+          <h4 class="panel-section-title">장착 보석</h4>
+          <div class="gems-big-grid"
+               th:if="${armory.armoryGem.gems != null and !#lists.isEmpty(armory.armoryGem.gems)}">
+            <div class="gem-big-card" th:each="gem : ${armory.armoryGem.gems}">
+              <div class="gem-icon-wrap">
+                <img th:src="${gem.icon}" th:alt="${gem.name}"
+                     onerror="this.src='https://placehold.co/52x52/1a1a2e/555?text=?'"/>
+                <span class="gem-lv-badge" th:text="'Lv.' + ${gem.level}">Lv.10</span>
+              </div>
+              <div class="gem-info">
+                <p    th:text="${gem.name}">보석명</p>
+                <span th:text="${gem.grade}">등급</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 보석 스킬 효과 -->
+          <div th:if="${armory.armoryGem.effects != null and !#lists.isEmpty(armory.armoryGem.effects)}"
+               style="margin-top:28px">
+            <h4 class="panel-section-title">보석 효과</h4>
+            <div class="gem-effect-list">
+              <div class="gem-effect-row"
+                   th:each="eff : ${armory.armoryGem.effects}">
+                <span class="gem-eff-skill" th:text="${eff.name}">스킬명</span>
+                <p    class="gem-eff-desc"  th:text="${eff.description}">효과</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div th:if="${armory?.armoryGem == null}" class="empty-msg">보석 정보가 없습니다.</div>
+      </div>
+
+      <!-- ── 카드 탭 ── -->
+      <div class="panel" id="panel-cards">
+        <div th:if="${armory?.armoryCard != null}">
+          <div class="cards-layout">
+
+            <!-- 카드 그리드 -->
+            <div class="cards-left">
+              <h4 class="panel-section-title">장착 카드</h4>
+              <div class="cards-big-grid"
+                   th:if="${armory.armoryCard.cards != null}">
+                <div class="card-big-item" th:each="card : ${armory.armoryCard.cards}">
+                  <div class="card-img-wrap">
+                    <img th:src="${card.icon}" th:alt="${card.name}"
+                         onerror="this.src='https://placehold.co/72x100/1a1a2e/555?text=?'"/>
+                    <!-- 각성 게이지 -->
+                    <div class="card-awake">
+                      <span th:each="i : ${#numbers.sequence(1, card.awakeTotal)}"
+                            class="awake-dot"
+                            th:classappend="${i <= card.awakeCount} ? ' filled' : ''">
+                      </span>
+                    </div>
+                  </div>
+                  <p th:text="${card.name}">카드명</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 카드 세트 효과 -->
+            <div class="cards-right"
+                 th:if="${armory.armoryCard.effects != null}">
+              <h4 class="panel-section-title">세트 효과</h4>
+              <div class="card-effect-list">
+                <div class="card-effect-group"
+                     th:each="eff : ${armory.armoryCard.effects}">
+                  <div class="ceg-header">
+                    <span class="ceg-index" th:text="${eff.index} + '세트'">세트</span>
+                  </div>
+                  <div class="ceg-items">
+                    <div class="ceg-item" th:each="item : ${eff.items}">
+                      <span class="ceg-name" th:text="${item.name}">효과명</span>
+                      <p    class="ceg-desc" th:if="${item.description != null}"
+                            th:text="${item.description}">설명</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div th:if="${armory?.armoryCard == null}" class="empty-msg">카드 정보가 없습니다.</div>
+      </div>
+
+    </div><!-- panel-wrap -->
+
+  </th:block>
+</main>
+
+<div th:replace="~{Footer :: footer}"></div>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/lostark-character.js}"></script>
+</body>
+</html>
